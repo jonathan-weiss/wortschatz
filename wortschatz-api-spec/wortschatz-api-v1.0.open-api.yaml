@@ -1,0 +1,59 @@
+openapi: "3.0.0"
+info:
+  version: "1.0"
+  title: Wortschatz API
+  license:
+    name: MIT
+tags:
+- name: wortschatz
+  description: REST services for wortschatz
+
+servers:
+  - url: http://localhost:8080/v1
+paths:
+  /wortschatz/vocabulary-card-set:
+    get:
+      summary: A set of vocabulary cards
+      operationId: vocabularyCardSet
+      tags:
+        - wortschatz
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: A list of vocabulary cards
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VocabularyCardSetResponseDto"
+components:
+  schemas:
+    VocabularyCardSetResponseDto:
+      type: object
+      required:
+        - vocabularyCards
+      properties:
+        vocabularyCards:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/VocabularyCardDto'
+
+    VocabularyCardDto:
+      type: object
+      required:
+        - foreignWord
+        - validationWord
+      properties:
+        foreignWord:
+          type: string
+          nullable: false
+        validationWord:
+          type: string
+          nullable: false
