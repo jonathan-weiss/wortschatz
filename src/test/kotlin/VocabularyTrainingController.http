@@ -1,0 +1,9 @@
+GET http://127.0.0.1:8080/
+Content-Type: application/xhtml+xml
+
+###
+
+GET http://127.0.0.1:8080/vocabulary-card-set
+Content-Type: application/json
+
+###

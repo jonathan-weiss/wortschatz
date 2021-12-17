@@ -1,0 +1,9 @@
+.training-area {
+    border: cadetblue solid thin;
+    height: 100px;
+}
+
+.validation-area {
+    border: cadetblue solid thin;
+    height: 100px;
+}

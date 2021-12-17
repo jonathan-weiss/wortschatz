@@ -1,9 +1,0 @@
-GET http://127.0.0.1:8080/
-Content-Type: application/json
-
-###
-
-GET http://127.0.0.1:8080/hello
-Content-Type: application/json
-
-###
