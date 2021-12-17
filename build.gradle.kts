@@ -59,3 +59,9 @@ configure<OpenApiGeneratorGenerateExtension> {
     )
 
 }
+
+
+// define what to do for github workflows
+tasks.register("github-ci") {
+    dependsOn ("build")
+}
