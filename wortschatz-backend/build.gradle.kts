@@ -8,10 +8,9 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.0"
     kotlin("plugin.spring") version "1.6.0"
+    id("com.palantir.docker") version "0.31.0"
 }
 
-group = "ch.jonathanweiss"
-version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -99,6 +98,39 @@ tasks.register<Delete>("cleanGeneratedFiles") {
     description = "Copy all relevant generated files from task openApiGenerate into the src directory."
 
     delete(project.projectDir.resolve("src/main/kotlin-generated"))
+}
+
+docker {
+    val pathToJar = project.buildDir.resolve("libs/${project.name}-${project.version}.jar")
+    val dockerNameAndVersion = "${project.name}:${project.version}"
+
+    // the name of the image to build including version
+    name = dockerNameAndVersion
+
+    // the Dockerfile to use for building
+    setDockerfile(project.projectDir.resolve("docker/Dockerfile"))
+    //arguments to inject into Dockerfile
+    buildArgs(mapOf("JAR_FILE" to pathToJar.name))
+    // files to attach to the docker build context (as flat file structure)
+    files(pathToJar)
+
+    // tags for pushing image
+    tag("dockerHub", "docker.io/wortschatz/$dockerNameAndVersion")
+
+    // options
+    pull(false)
+    noCache(false)
+}
+
+tasks.getByName<Jar>("jar") {
+    // do not produce the wortschatz-backend-xxx-plain.jar, only the executable jar from task bootJar
+    enabled = false
+}
+
+val bootJarTask = tasks.named<Jar>("bootJar")
+
+tasks.named("dockerPrepare") {
+    inputs.file(bootJarTask.get().archiveFile)
 }
 
 idea.module {

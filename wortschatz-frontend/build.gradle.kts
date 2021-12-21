@@ -5,6 +5,7 @@ plugins {
   idea
   id("org.openapi.generator") version "5.3.0"
   id("com.github.node-gradle.node") version "3.1.1"
+  id("com.palantir.docker") version "0.31.0"
 }
 
 repositories {
@@ -76,7 +77,7 @@ tasks.register<Delete>("npmClean") {
   delete(project.projectDir.resolve("src/openapi"))
 }
 
-tasks.register<NpmTask>("buildAngular") {
+val buildAngularTask = tasks.register<NpmTask>("buildAngular") {
   description = "Build the angular productive version into 'dist' folder"
   dependsOn("copyOpenApiGeneratedFiles")
   dependsOn("npmInstall")
@@ -105,6 +106,34 @@ tasks.register<NpmTask>("testAngular") {
   workingDir.set(projectDir)
   args.set(listOf("run", "test"))
 
+}
+
+docker {
+
+  val pathToDistDir = projectDir.resolve("dist")
+  val dockerNameAndVersion = "${project.name}:${project.version}"
+
+  // the name of the image to build including version
+  name = dockerNameAndVersion
+
+  // the Dockerfile to use for building
+  setDockerfile(project.projectDir.resolve("docker/Dockerfile"))
+  //arguments to inject into Dockerfile
+  buildArgs(mapOf("DIST_DIRECTORY_NAME" to "wortschatz-app"))
+
+  // files to attach to the docker build context (as flat file structure)
+  files(pathToDistDir)
+
+  // tags for pushing image
+  tag("dockerHub", "docker.io/wortschatz/$dockerNameAndVersion")
+
+  // options
+  pull(false)
+  noCache(false)
+}
+
+tasks.named("dockerPrepare") {
+  inputs.files(buildAngularTask.get().outputs)
 }
 
 
