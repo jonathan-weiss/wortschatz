@@ -3,7 +3,7 @@ Content-Type: application/xhtml+xml
 
 ###
 
-GET http://127.0.0.1:8080/wortschatz/vocabulary-card-set
+GET http://127.0.0.1:8080/api/wortschatz/vocabulary-card-set
 Content-Type: application/json
 
 ###

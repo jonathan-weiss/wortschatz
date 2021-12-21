@@ -17,13 +17,19 @@ configure<OpenApiGeneratorGenerateExtension> {
   generatorName.set("typescript-angular")
   inputSpec.set("$rootDir/wortschatz-api-spec/wortschatz-api-v1.0.open-api.yaml")
   outputDir.set("$buildDir/generated")
-  apiPackage.set("ch.jonathanweiss.wortschatz.api")
-  invokerPackage.set("ch.jonathanweiss.wortschatz.invoker")
-  modelPackage.set("ch.jonathanweiss.wortschatz.model")
+//  apiPackage.set("ch.jonathanweiss.wortschatz.api")
+//  invokerPackage.set("ch.jonathanweiss.wortschatz.invoker")
+//  modelPackage.set("ch.jonathanweiss.wortschatz.model")
   // see https://openapi-generator.tech/docs/generators/typescript-angular/
   configOptions.set(
     mapOf(
       "fileNaming" to "camelCase",
+      "sortParamsByRequiredFlag" to "true",
+      "supportsES6" to "false",
+      "withInterfaces" to "true",
+      "ngVersion" to "10.0",
+      "useRxJS6" to "true",
+      "removeEnumValuePrefix" to "false"
     )
   )
 
@@ -36,7 +42,8 @@ tasks.register<Copy>("copyOpenApiGeneratedFiles") {
 
   duplicatesStrategy = DuplicatesStrategy.INCLUDE
 
-  from(project.buildDir.resolve("generated/org/openapi/example")) {
+  from(project.buildDir.resolve("generated/")) {
+    include("*.ts")
     include("api/*")
     include("model/*")
   }

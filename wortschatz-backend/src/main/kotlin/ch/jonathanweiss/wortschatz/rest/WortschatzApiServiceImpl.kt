@@ -12,6 +12,10 @@ class WortschatzApiServiceImpl: WortschatzApiService{
     override fun vocabularyCardSet(limit: Int?): VocabularyCardSetResponseDto {
         return VocabularyCardSetResponseDto(listOf(
             VocabularyCardDto("hello","Hallo"),
+            VocabularyCardDto("morning","Morgen"),
+            VocabularyCardDto("evening","Abend"),
+            VocabularyCardDto("sun","Sonne"),
+            VocabularyCardDto("moon","Mond"),
             VocabularyCardDto("bye","Tschüss")
         ))
     }

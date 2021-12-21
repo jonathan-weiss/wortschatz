@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-title>English</mat-card-title>
+  <mat-card-subtitle>Category: Alltag</mat-card-subtitle>
+  <mat-card-content>
+    <p>{{vocabularyCard.foreignWord}}</p>
+    <mat-divider ></mat-divider>
+    <p><span *ngIf="!isCovered">{{vocabularyCard.validationWord}}</span>&nbsp;</p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button *ngIf="isCovered" (click)="uncoverCard()" mat-button>UNCOVER</button>
+    <button *ngIf="!isCovered" [disabled]="!hasNext" (click)="nextCard()" mat-button>NEXT</button>
+  </mat-card-actions>
+</mat-card>

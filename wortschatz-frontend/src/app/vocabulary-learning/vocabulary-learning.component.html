@@ -1,0 +1,15 @@
+<ng-container *ngIf="isLoading">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</ng-container>
+
+<ng-container *ngIf="isLearning()">
+  <vocabulary-learning-card
+    [vocabularyCard]="currentVocabularyCard()"
+    [isCovered]="isCardCovered"
+    [hasNext]="hasNext()"
+    (uncoverVocabularyCard)="uncoverCard()"
+    (nextVocabularyCard)="nextCard()"
+  ></vocabulary-learning-card>
+
+</ng-container>
+
