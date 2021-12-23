@@ -1,36 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {VocabularyCardDto, VocabularyCardSetResponseDto, WortschatzService} from "../generated/openapi";
+import {v4 as uuidv4} from 'uuid';
+
+
+
+import {
+  AddVocabularyCardRequestDto,
+  VocabularyCardDto,
+  VocabularyCardSetResponseDto,
+  WortschatzService
+} from "../generated/openapi";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'wortschatz-app';
-  vocabularyCards: Array<VocabularyCardDto> = []
+export class AppComponent {
 
-  isLoading = true;
 
 
   constructor(private wortschatzService: WortschatzService) {
   }
 
-  ngOnInit(): void {
-    this.wortschatzService.vocabularyCardSet().subscribe((response: VocabularyCardSetResponseDto) => {
-      this.vocabularyCards.push(... response.vocabularyCards)
-      // this.isLoading = false
-    })
 
-  }
-
-  resolve(): void {
-
-  }
-
-  nextCard(): void {
-
-  }
 
 
 }

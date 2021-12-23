@@ -1,5 +1,6 @@
 package ch.jonathanweiss.wortschatz.rest.api
 
+import ch.jonathanweiss.wortschatz.rest.model.AddVocabularyCardRequestDto
 import ch.jonathanweiss.wortschatz.rest.model.VocabularyCardSetResponseDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -16,6 +17,17 @@ import kotlin.collections.Map
 @RestController
 @RequestMapping("\${api.base-path:/v1}")
 class WortschatzApiController(@Autowired(required = true) val service: WortschatzApiService) {
+
+
+    @RequestMapping(
+        method = [RequestMethod.POST],
+        value = ["/wortschatz/add-vocabulary-card"],
+        consumes = ["application/json"]
+    )
+    fun addVocabularyCard(  @RequestBody addVocabularyCardRequestDto: AddVocabularyCardRequestDto
+): ResponseEntity<Unit> {
+        return ResponseEntity(service.addVocabularyCard(addVocabularyCardRequestDto), HttpStatus.valueOf(200))
+    }
 
 
     @RequestMapping(

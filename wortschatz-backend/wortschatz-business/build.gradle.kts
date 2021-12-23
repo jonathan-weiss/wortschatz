@@ -27,6 +27,7 @@ dependencies {
     implementation("org.springframework:spring-context")
 
     implementation("org.axonframework:axon-micrometer:4.5.1")
+    implementation("org.axonframework:axon-spring:4.5.1")
 
 }
 

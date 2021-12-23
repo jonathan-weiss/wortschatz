@@ -11,5 +11,9 @@
     (nextVocabularyCard)="nextCard()"
   ></vocabulary-learning-card>
 
+  <br>
+  Number of cards: {{ numberOfVocabularyCards() }}
+  <br>
+  <button (click)="addCard()" mat-button>ADD</button>
 </ng-container>
 

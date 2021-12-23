@@ -7,3 +7,12 @@ GET http://127.0.0.1:8080/api/wortschatz/vocabulary-card-set
 Content-Type: application/json
 
 ###
+
+
+POST http://127.0.0.1:8080/api/wortschatz/add-vocabulary-card
+Content-Type: application/json
+
+{
+  "foreignWord": "sun",
+  "validationWord": "Sonne"
+}

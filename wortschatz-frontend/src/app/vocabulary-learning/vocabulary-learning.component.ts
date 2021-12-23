@@ -1,5 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {VocabularyCardDto, VocabularyCardSetResponseDto, WortschatzService} from "../../generated/openapi";
+import {
+  AddVocabularyCardRequestDto,
+  VocabularyCardDto,
+  VocabularyCardSetResponseDto,
+  WortschatzService
+} from "../../generated/openapi";
+import {v4 as uuidv4} from "uuid";
 
 @Component({
   selector: 'vocabulary-learning',
@@ -19,11 +25,23 @@ export class VocabularyLearningComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadCards()
+  }
+
+  private loadCards(): void {
+    this.isLoading = true
     this.wortschatzService.vocabularyCardSet().subscribe((response: VocabularyCardSetResponseDto) => {
+      this.vocabularyCards = []
       this.vocabularyCards.push(... response.vocabularyCards)
+      this.isCardCovered = true
+      this.vocabularyCardIndex = 0
       this.isLoading = false
     })
 
+  }
+
+  numberOfVocabularyCards(): number {
+    return this.vocabularyCards.length
   }
 
   currentVocabularyCard(): VocabularyCardDto {
@@ -56,5 +74,19 @@ export class VocabularyLearningComponent implements OnInit {
     return !this.isLoading
   }
 
+  // TODO move to own component
+  addCard(): void {
+    const cardToAdd: VocabularyCardDto = {
+      id: uuidv4(),
+      foreignWord: 'addition',
+      validationWord: 'Zusatz'
+    }
+    const request: AddVocabularyCardRequestDto = {
+      vocabularyCardToAdd: cardToAdd
+    }
+    this.wortschatzService.addVocabularyCard(request).subscribe(() => {
+      this.loadCards()
+    })
+  }
 
 }

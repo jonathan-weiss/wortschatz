@@ -32,8 +32,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/VocabularyCardSetResponseDto"
+  /wortschatz/add-vocabulary-card:
+    post:
+      summary: Add a vocabulary card
+      operationId: addVocabularyCard
+      tags:
+        - wortschatz
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddVocabularyCardRequestDto"
+
+      responses:
+        '200':
+          description: Content was added successfully
+
 components:
   schemas:
+    AddVocabularyCardRequestDto:
+      type: object
+      required:
+        - vocabularyCardToAdd
+      properties:
+        vocabularyCardToAdd:
+          $ref: '#/components/schemas/VocabularyCardDto'
+
     VocabularyCardSetResponseDto:
       type: object
       required:
@@ -48,9 +73,14 @@ components:
     VocabularyCardDto:
       type: object
       required:
+        - id
         - foreignWord
         - validationWord
       properties:
+        id:
+          type: string
+          format: uuid
+          nullable: false
         foreignWord:
           type: string
           nullable: false

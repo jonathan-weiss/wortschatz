@@ -49,7 +49,7 @@ class AxonConfig {
     }
 
     @Bean
-    fun axonCache(): Cache {
+    fun vocabularyCardCache(): Cache {
         return WeakReferenceCache()
     }
 }
