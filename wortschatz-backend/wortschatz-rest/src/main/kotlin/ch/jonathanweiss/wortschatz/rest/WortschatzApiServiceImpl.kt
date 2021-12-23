@@ -12,7 +12,7 @@ class WortschatzApiServiceImpl(private val wortschatzRestApiAdapter: WortschatzR
 
     override fun vocabularyCardSet(limit: Int?): VocabularyCardSetResponseDto {
         return VocabularyCardSetResponseDto(
-             wortschatzRestApiAdapter.fetchVocabularyCardSetQuery().map { VocabularyCardDto(it.foreignWord, it.validationWord) }
+             wortschatzRestApiAdapter.fetchVocabularyCardSetQuery().map(Mappers.vocabularyCardMapper::mapToDto)
         )
 
 //        return VocabularyCardSetResponseDto(listOf(

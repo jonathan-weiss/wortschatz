@@ -4,6 +4,7 @@ import org.openapitools.generator.gradle.plugin.extensions.OpenApiGeneratorGener
 plugins {
     kotlin("jvm")
     kotlin("plugin.spring")
+    kotlin("kapt")
     idea
     id("org.springframework.boot") apply false
     id("io.spring.dependency-management")
@@ -35,11 +36,20 @@ dependencies {
 
     implementation(project(":wortschatz-backend:wortschatz-business"))
 
-
+    implementation("org.mapstruct:mapstruct:1.5.0.Beta1")
+    kapt("org.mapstruct:mapstruct-processor:1.5.0.Beta1")
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 
+kapt {
+    arguments {
+        // Set Mapstruct Configuration options here
+        // https://kotlinlang.org/docs/reference/kapt.html#annotation-processor-arguments
+        // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
+        arg("mapstruct.defaultInjectionStrategy", "constructor")
+    }
+}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
