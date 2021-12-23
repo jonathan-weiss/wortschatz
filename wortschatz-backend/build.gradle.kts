@@ -8,7 +8,3 @@ plugins {
 }
 
 
-// define what to do for github workflows
-tasks.named("github-ci") {
-    dependsOn ("build")
-}
