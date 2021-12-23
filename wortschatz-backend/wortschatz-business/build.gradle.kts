@@ -26,6 +26,8 @@ dependencies {
     implementation("org.springframework:spring-beans")
     implementation("org.springframework:spring-context")
 
+    implementation("org.axonframework:axon-micrometer:4.5.1")
+
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_11

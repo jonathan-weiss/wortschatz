@@ -33,6 +33,7 @@ dependencies {
     implementation("org.springframework:spring-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    implementation(project(":wortschatz-backend:wortschatz-business"))
 
 
 }

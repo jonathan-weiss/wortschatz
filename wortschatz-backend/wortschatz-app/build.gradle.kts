@@ -31,6 +31,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 //    testImplementation("org.springframework.security:spring-security-test")
 
+
+    implementation("org.axonframework:axon-spring-boot-starter:4.5.1")
+
     implementation(project(":wortschatz-backend:wortschatz-rest"))
     implementation(project(":wortschatz-backend:wortschatz-business"))
 }
