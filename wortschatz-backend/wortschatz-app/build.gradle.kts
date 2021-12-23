@@ -6,7 +6,7 @@ plugins {
     idea
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    id("com.palantir.docker") version "0.31.0"
+    id("com.palantir.docker")
 
 }
 

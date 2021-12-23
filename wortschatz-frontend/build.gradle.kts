@@ -3,9 +3,9 @@ import com.github.gradle.node.npm.task.NpmTask
 
 plugins {
   idea
-  id("org.openapi.generator") version "5.3.0"
+  id("org.openapi.generator")
   id("com.github.node-gradle.node") version "3.1.1"
-  id("com.palantir.docker") version "0.31.0"
+  id("com.palantir.docker")
 }
 
 repositories {

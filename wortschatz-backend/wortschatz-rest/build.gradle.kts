@@ -7,7 +7,7 @@ plugins {
     idea
     id("org.springframework.boot") apply false
     id("io.spring.dependency-management")
-    id("org.openapi.generator") version "5.3.0"
+    id("org.openapi.generator")
 
 }
 
